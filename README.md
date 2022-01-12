@@ -1,4 +1,4 @@
-#Redis Nedir ?
+# Redis Nedir ?
 - Redis, geliştiriciler tarafından en çok kullanılan ve bilinen NoSQL veritabanlarından birisidir.
 - Redis, açık kaynaktır ve kaynak kodlarına GitHub üzerinden erişilebilmektedir. 
 - C dili ile yazıldığı için yüksek performanslı sonuçlar vermektedir. 
