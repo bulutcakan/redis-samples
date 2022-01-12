@@ -17,6 +17,29 @@ Redis, pub/sub işlevini destekleyen komutlara da sahiptir ve Redis’in broadca
 ## Queues (Kuyruklar)
 Redis, gerçekleşmesi zaman alacak işleri bir kuyruk yapısına alınmasını ve daha sonradan işlenmesini destekler.
 
+
+# Redis’in Avantajları
+##Yüksek Performans
+Redis, verileri disklerde (HDD veya SSD) tutan veri tabanlarının akside bellek (RAM) üzerinde tutar bu sayede disklere erişim ihtiyacını ortadan kaldırarak gecikmeleri, I/O bağlantılarını önler ve daha az CPU kullanan basit algoritmalar ile verilere erişir.
+
+## In-Memory Veri Yapıları
+Redis verileri bellek üzerinde <key,value> çifti olarak tutmaktadır, burada herbir anahtara denk gelen değerler farklı veri yapılarında tutulabilmektedir. Bu veri yapıları; String, List, Hash, Set, Sorted Set, Bitmaps, HyperLogLogs, Geospatial Indexes
+
+Redis kullanılarak neredeyse her türlü veri bellekte saklanabilir.
+
+## Replication
+Redis, master-slave mimarisini kullanır, master genel olarak yazma işlemlerini yapar ve slave dediğimiz yapılar da master’in birer kopyasıdır, master güncellendikçe ona bağlı bütün slave’ler de güncellenir. Burada master’da oluşacak herhangi bir çökmede, hatada direkt bir slave master olarak seçilir ve sistem çalışmaya devam eder.
+
+## Persistance (Veri Kalıcılığı)
+Redis’te verilerin RAM üzerinde saklandığından bahsettik, olası bir elektrik kesintisi, sunucu kapanması gibi durumlarda veriler silinecektir. Redis bize iki yöntem sunmaktadır verinin kalıcılığını sağlamak için. Bunlar; point-in-time Snapshots ve Append Only File (AOF).
+
+Snapshots yönteminde belirli zaman aralıkları ile RAM üzerindeki verinin kaydı, kopyası diske kayıt edilir bu sayede olası bir elektrik kesintisi gibi durumlarda disk üzerinden verilere tekrar geri dönülebilir.
+
+Append Only File yönteminde ise her değişikliği dosyanın sonuna yazarak oluşan veri değişikliklerinin kaydını tutar.
+
+## Çoklu Dil Desteği
+Redis birçok dil tarafından desteklenmektedir, bunlar; Java, Python, PHP, C, C ++, C #, JavaScript, Node.js, Ruby, R, Go gibi dillerdir ve bunların yanı sıra daha fazla da dil bulunmaktadır.
+
 ## Redis Örnekleri
 Spring boot üzerinde Redis implentasyonları
 - 1-Spring boot ile redis i database olarak kullanma
