@@ -1,6 +1,7 @@
 package com.bulut.redis.configuration;
 
 import com.bulut.redis.subscriber.RedisMessageSubscriber;
+import com.bulut.redis.subscriber.RedisTopicExperimentSubscriber;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisPassword;
@@ -51,8 +52,18 @@ public class RedisConfiguration {
     }
 
     @Bean
+    public ChannelTopic topicExperiment() {
+        return new ChannelTopic("pubsub:bulut-experiment");
+    }
+
+    @Bean
     public MessageListenerAdapter messageListenerAdapter() {
         return new MessageListenerAdapter(new RedisMessageSubscriber());
+    }
+
+    @Bean
+    public MessageListenerAdapter topicExperimentMessageListenerAdapter() {
+        return new MessageListenerAdapter(new RedisTopicExperimentSubscriber());
     }
 
     @Bean
@@ -60,6 +71,7 @@ public class RedisConfiguration {
         RedisMessageListenerContainer container = new RedisMessageListenerContainer();
         container.setConnectionFactory(jedisConnectionFactory());
         container.addMessageListener(messageListenerAdapter(), topic());
+        container.addMessageListener(topicExperimentMessageListenerAdapter(), topicExperiment());
         return container;
     }
 

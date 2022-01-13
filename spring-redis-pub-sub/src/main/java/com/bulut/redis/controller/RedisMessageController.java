@@ -1,7 +1,9 @@
 package com.bulut.redis.controller;
 
+import com.bulut.redis.dto.NotificationDTO;
 import com.bulut.redis.dto.ProductDTO;
-import com.bulut.redis.publisher.RedisMessagePublisher;
+import com.bulut.redis.publisher.RedisNotificationMessagePublisher;
+import com.bulut.redis.publisher.RedisProductMessagePublisher;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,10 +21,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class RedisMessageController {
 
 
-    private final RedisMessagePublisher redisMessagePublisher;
+    private final RedisProductMessagePublisher redisMessagePublisher;
+    private final RedisNotificationMessagePublisher notificationMessagePublisher;
 
-    @PostMapping("/publish")
-    public String publish(@RequestBody ProductDTO productDTO) {
+
+    @PostMapping("/notification/publish")
+    public String notificationPublish(@RequestBody NotificationDTO productDTO) {
+        notificationMessagePublisher.publish(productDTO);
+        return "Event published!!";
+    }
+
+    @PostMapping("/product/publish")
+    public String productPublish(@RequestBody ProductDTO productDTO) {
         redisMessagePublisher.publish(productDTO);
         return "Event published!!";
     }
